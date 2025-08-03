@@ -6,72 +6,78 @@ This repository showcases a robust backend API built with **FastAPI**, featuring
 
 ---
 
-## ✅ Features Completed 
+## ✅ Features Completed
 
-- 🔧 **Project Setup**  
-  - Python virtual environments (Mac & Windows)
-  - Dependency management via `pip`
-  - Modular FastAPI app structure
+* 🔧 **Project Setup**
 
-- 🚀 **Core FastAPI Concepts**
-  - Path operations (GET, POST, DELETE, PUT)
-  - Response models with **Pydantic**
-  - Built-in Swagger docs for testing
+  * Python virtual environments (Mac & Windows)
+  * Dependency management via `pip`
+  * Modular FastAPI app structure
 
-- 💾 **PostgreSQL Integration**
-  - Schema and table creation
-  - SQL queries (raw & ORM via SQLAlchemy)
-  - Environment variables for DB config
+* 🚀 **Core FastAPI Concepts**
 
-- 🧱 **SQLAlchemy ORM**
-  - Models, session management, and CRUD operations
-  - Timestamps, filtering, and relationships
+  * Path operations (GET, POST, DELETE, PUT)
+  * Response models with **Pydantic**
+  * Built-in Swagger docs for testing
 
-- 🛡️ **Authentication (in progress)**
-  - User registration with hashed passwords (via `passlib[argon2]`)
-  - Modular router for user operations
-  - ✅ JWT Token Basics introduced
+* 💾 **PostgreSQL Integration**
+
+  * Schema and table creation
+  * SQL queries (raw & ORM via SQLAlchemy)
+  * Environment variables for DB config
+
+* 🧱 **SQLAlchemy ORM**
+
+  * Models, session management, and CRUD operations
+  * Timestamps, filtering, and relationships
+
+* 🛡️ **Authentication**
+
+  * User registration with password hashing using `passlib[argon2]`
+  * Login endpoint using OAuth2 `PasswordRequestForm`
+  * JWT token generation & decoding with `python-jose[cryptography]`
+  * Verified route protection using `Depends(get_current_user)`
+  * Advanced Postman usage (collections, tokens, headers)
 
 ---
 
 ## 🔜 Upcoming Features
 
-- 🔑 OAuth2 Login Flow (with Password Grant)
-- Token creation, verification, and route protection
-- Vote/Like system and relationships
-- Alembic migrations
-- CI/CD with GitHub Actions
-- Docker-based deployment (Heroku & Ubuntu)
+* 🧩 User relationships and post ownership
+* 🔘 Vote/Like system (and preventing duplicate votes)
+* 🔁 Alembic DB migrations
+* ✅ GitHub CI/CD pipeline with testing
+* 🐳 Docker-based deployment (Heroku & Ubuntu)
 
 ---
 
 ## 📦 Tech Stack
 
-- **FastAPI** (Backend Framework)
-- **PostgreSQL** (Relational DB)
-- **SQLAlchemy** (ORM)
-- **Pydantic** (Data validation)
-- **Passlib** (Password hashing)
-- **JWT** (Authentication)
-- **Docker, GitHub Actions** (Deployment & CI/CD - planned)
+* **FastAPI** (Backend Framework)
+* **PostgreSQL** (Relational DB)
+* **SQLAlchemy** (ORM)
+* **Pydantic** (Data validation)
+* **Passlib** (Password hashing)
+* **JWT via python-jose** (Authentication)
+* **Docker, GitHub Actions** (Deployment & CI/CD - upcoming)
 
 ---
 
 ## 🗂️ Project Structure (so far)
 
 ```
-
 app/
 ├── main.py
 ├── database.py
 ├── models.py
 ├── schemas.py
+├── oauth2.py              # JWT logic
 ├── utils.py               # password hashing
 ├── routers/
 │   ├── users.py
-│   └── posts.py
-
-````
+│   ├── posts.py
+│   └── auth.py            # login route
+```
 
 ---
 
@@ -86,12 +92,8 @@ cd fastapi-production-ready-app
 python -m venv venv
 source venv/bin/activate  # or venv\Scripts\activate on Windows
 
-# Install dependencies
-pip install -r requirements.txt
-
 # Run the app
 uvicorn app.main:app --reload
-````
+```
 
 ---
-
