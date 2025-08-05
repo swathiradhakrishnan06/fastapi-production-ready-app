@@ -108,7 +108,3 @@ uvicorn app.main:app --reload
 📘 Want full explanations, SQLAlchemy vs Pydantic insights, and JWT code examples?
 
 → [DETAILED\_README.md](./DETAILED_README.md)
-
-```
-
----
