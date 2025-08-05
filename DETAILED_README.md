@@ -272,8 +272,84 @@ alembic init alembic
 alembic revision --autogenerate -m "add user_id to posts"
 alembic upgrade head
 ```
+---
+
+## ☁️ Deployment Progress: EC2 + RDS
+
+### ✅ Steps Completed:
+
+1. **Created EC2 instance** (Ubuntu 22.04)
+
+   * Enabled inbound security rule for port 22 (SSH) and 8000 (Uvicorn)
+
+2. **Connected to EC2 via SSH** using `.pem` key
+
+   * Updated system, installed Python 3.12, `venv`, `git`, and `pip`
+
+3. **Cloned GitHub repo and set up virtual environment**
+
+```bash
+git clone https://github.com/swathiradhakrishnan06/fastapi-production-ready-app.git
+cd fastapi-production-ready-app
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+4. **Created `.env` file** with RDS credentials
+
+```env
+DATABASE_HOST=<rds-endpoint>
+DATABASE_PORT=5432
+DATABASE_NAME=fastapi
+DATABASE_USER=postgres
+DATABASE_PASSWORD=password123
+SECRET_KEY=<your-secret>
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+```
+
+5. **Configured RDS PostgreSQL instance**
+
+   * Created via AWS RDS Console
+   * Set public access + added security group rule for port 5432 from anywhere (for dev)
+   * Created `fastapi` database inside RDS using pgAdmin or `psql`
+
+6. **Ran Alembic Migrations from EC2 to RDS**
+
+```bash
+alembic upgrade head
+```
+
+✅ Migrations succeeded and created all tables.
+
+7. **Started FastAPI app with Uvicorn**
+
+```bash
+uvicorn app.main:app --host 0.0.0.0 --port 8000
+```
+
+* Accessed from browser: `http://<ec2-public-ip>:8000`
 
 ---
+## 🔐 Security Notes
+
+> 🚨 Important: You should NOT expose RDS publicly in production.
+
+* Add more secure inbound rules (e.g. allow 5432 only from EC2 IP)
+* Use `.env.example` to share structure without secrets
+
+---
+
+## 🔁 What’s Next?
+
+* Option 1: Setup **Gunicorn + NGINX** on EC2 for production-ready API
+* Option 2: Migrate to **AWS Lambda + API Gateway** (serverless)
+* Option 3: Add **Terraform** to provision infra automatically
+
+---
+
+🔗 [Back to Main README](./README.md)
 
 ## 🔖 Summary So Far
 
@@ -287,3 +363,4 @@ alembic upgrade head
 * ✅ Vote/Like system
 * ✅ SQLAlchemy relationships (User <-> Posts)
 * ✅ Alembic migrations for schema versioning
+* ✅ Deployment: EC2 + RDS

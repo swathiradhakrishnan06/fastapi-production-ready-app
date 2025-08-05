@@ -9,25 +9,30 @@ This repository showcases a robust backend API built with **FastAPI**, featuring
 ## ✅ Features Completed
 
 * 🔧 **Project Setup**
+
   * Python virtual environments (Mac & Windows)
   * Dependency management via `pip`
   * Modular FastAPI app structure
 
 * 🚀 **Core FastAPI Concepts**
+
   * Path operations (GET, POST, DELETE, PUT)
   * Response models with **Pydantic**
   * Built-in Swagger docs for testing
 
 * 💾 **PostgreSQL Integration**
+
   * Schema and table creation
   * SQL queries (raw & ORM via SQLAlchemy)
   * Environment variables for DB config
 
 * 🧱 **SQLAlchemy ORM**
+
   * Models, session management, and CRUD operations
   * Timestamps, filtering, and relationships
 
 * 🔐 **Authentication & Authorization**
+
   * User registration with password hashing via `passlib[argon2]`
   * OAuth2 Login with JWT using `python-jose[cryptography]`
   * Protected routes via `Depends(get_current_user)`
@@ -36,14 +41,22 @@ This repository showcases a robust backend API built with **FastAPI**, featuring
   * Voting system (like/unlike a post)
 
 * 🧬 **Alembic Migrations**
+
   * Auto-generate DB migration scripts
   * Apply schema changes incrementally
+
+* ☁️ **Deployment: EC2 + RDS (AWS)**
+
+  * FastAPI hosted on Ubuntu EC2 instance
+  * PostgreSQL migrated to AWS RDS
+  * Environment securely configured with `.env`
+  * Alembic applied remotely to RDS from EC2
+  * ✅ Tested API live via EC2 Public IP
 
 ---
 
 ## 🔜 Upcoming Features
 
-* ✅ Deployment to **Heroku** (Section 13)
 * 🐧 Deployment on Ubuntu VM with NGINX + Gunicorn
 * 🐳 Docker + Docker Compose setup
 * 🔁 GitHub Actions for CI/CD & test automation
@@ -60,13 +73,13 @@ This repository showcases a robust backend API built with **FastAPI**, featuring
 * **Passlib** (Hashing)
 * **JWT** via `python-jose`
 * **Docker**, **Alembic**, **GitHub Actions**
+* **AWS EC2 + RDS** for deployment
 
 ---
 
 ## 🗂️ Project Structure (so far)
 
 ```
-
 app/
 ├── main.py
 ├── database.py
@@ -80,8 +93,7 @@ app/
 │   ├── posts.py
 │   ├── auth.py            # login
 │   └── vote.py            # like/unlike logic
-
-````
+```
 
 ---
 
@@ -101,7 +113,7 @@ pip install -r requirements.txt
 
 # Run the app
 uvicorn app.main:app --reload
-````
+```
 
 ---
 
